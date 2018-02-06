@@ -1,0 +1,62 @@
+Escape ANSI -> '\033[xm' donde x está en [0,107]
+
+Afecta a todo lo que venga después
+'\033[31mfoo' -> escribe 'foo' en rojo
+
+Es aditivo
+'\033[31m\033[4m\033[43mfoo' -> escribe 'foo' en rojo, subrayado con fondo amarillo
+
+El efecto se mantiene hasta que se cierra con x=0 -> '\033[0m'
+
+Para ver todos los efectos (0-107):
+https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_(Select_Graphic_Rendition)_parameters
+
+for i in range(0,108):
+    print('\033[{}m{}\033[0m'.format(i, 'String {}'.format({i})))
+
+En Gnome Terminal:
+0   -> todo por defecto
+1   -> negrita (bold)
+2   -> menos intensidad (dim, faint)
+3   -> cursiva
+4   -> subrayado
+
+7   -> invertido (reverse video)
+8   -> oculto
+9   -> tachado
+
+22  -> intensidad normal (neither bold nor faint)
+23  -> no cursiva
+24  -> no subrayado
+
+27  -> no inverso
+28  -> no oculto
+29  -> no tachado
+
+30-37   -> color del texto 1 (normal)*
+90-97   -> color del texto 2 (saturado)*
+39      -> color del texto por defecto
+
+40-47   -> color del fondo 1 (normal)*
+100-107 -> color del fondo 2 (saturado)*
+49      -> color del fondo por defecto
+
+COLORES_1 (normal)
+x0  -> negro (1,1,1) 0x010101
+x1  -> rojo (222,56,43) 0xDE382B
+x2  -> verde (57,181,74) 0x39B54A
+x3  -> amarillo (255,199,6) 0xFFC706
+x4  -> azul (0,111,184) 0x006FB8
+x5  -> morado (118,38,113) 0x762671
+x6  -> cian (44,181,233) 0x2CB5E9
+x7  -> blanco (204,204,204) 0xCCCCCC
+
+COLORES_2 (saturado)
+x0  -> gris (128,128,128) 0x808080
+x1  -> rojo claro (255,0,0) 0xFF0000
+x2  -> verde claro (0,255,0) 0x00FF00
+x3  -> amarillo claro (255,255,0) 0xFFFF00
+x4  -> azul claro (0,0,255) 0x0000FF
+x5  -> morado claro (255,0,255) 0xFF00FF
+x6  -> cyan claro (0,255,255) 0x00FFFF
+x7  -> blanco claro (255,255,255) 0xFFFFFF
